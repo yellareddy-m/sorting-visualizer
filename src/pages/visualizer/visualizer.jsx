@@ -30,14 +30,16 @@ const Visualizer = (props) => {
     }
 
     const swap = async (i, j, array) => {
+        clearHighlightIndices();
+        setSwapIndices([i, j]);
+        await delay(900)
+
         const temp = array[j];
         array[j] = array[i];
         array[i] = temp;
 
-        clearHighlightIndices();
-        setSwapIndices([i, j])
+
         // console.log('swap');
-        await delay(900)
     }
 
     const markSorted = (index) => {
