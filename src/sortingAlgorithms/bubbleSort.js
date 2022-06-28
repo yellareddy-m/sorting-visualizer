@@ -13,9 +13,7 @@ async function* bubbleSort(array, highlight, swap, markSorted) {
         markSorted(array.length - 1 - counter);
         counter++;
     }
-    yield;
+    markSorted(0);
 }
-
-
 
 export default bubbleSort;
