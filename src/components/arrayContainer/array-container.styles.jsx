@@ -1,10 +1,39 @@
-import styled from "styled-components";
+import styled, { css, keyframes } from "styled-components";
+
+
+const swapAnimation = props => keyframes`
+    0% {
+        transform: translate(0px, 0px);
+    }
+    10% {
+        transform: translate(0px, 0px);
+    }
+    30% {
+        transform: translate(0px, ${props.translateX < 0 ? '50' : '-50'}px);
+    }
+    75% {
+        transform: translate(${props.translateX}px, ${props.translateX < 0 ? '50' : '-50'}px);
+    }
+    90% {
+        transform: translate(${props.translateX}px, 0px);
+    }
+    100% {
+        transform: translate(${props.translateX}px, 0px);
+    }
+`;
+
+const swapAnimationCSSHelper = props =>
+    css`
+    animation: ${swapAnimation(props)} 800ms ease-out forwards;
+`;
 
 export const ArrayItems = styled.div`
-    width: 500px;
+    width: 25%;
     height: 250px;
     border: 1px solid #888;
     display: flex;
+    justify-content: center;
+    align-items: center;
 `;
 
 export const ArrayItem = styled.div`
@@ -18,4 +47,7 @@ export const ArrayItem = styled.div`
     border-radius: 5px;
     border: 1px solid black;
     background-color: ${props => props.bgColor};
+    ${(props) => props.translateX && swapAnimationCSSHelper};
 `;
+
+
