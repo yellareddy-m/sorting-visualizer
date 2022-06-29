@@ -34,3 +34,4 @@ async function* insertionSort(array, highlight, swap, markSorted) {
 }
 
 export default insertionSort;
+
