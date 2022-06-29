@@ -3,6 +3,7 @@ import { useRef, useState } from 'react';
 import ArrayContainer from '../../components/arrayContainer/array-container';
 import { delay } from '../../helpers';
 import bubbleSort from '../../sortingAlgorithms/bubbleSort';
+import insertionSort from '../../sortingAlgorithms/insertionSort';
 import selectionSort from '../../sortingAlgorithms/selectionSort';
 import { VisualizerContainer } from './visualizer.styles';
 
@@ -77,11 +78,25 @@ const Visualizer = (props) => {
         }
     }
 
+    const insertionSortClickHandler = async () => {
+        const sortFunc = insertionSort(arrayToSort.current, highlight, swap, markSorted);
+        let sortingFinished = false;
+        while (!sortingFinished) {
+            let nextValue = await sortFunc.next();
+            sortingFinished = nextValue.done
+        }
+        if (sortingFinished) {
+            setSwapIndices([-1, -1]);
+            setHighlightIndices([-1, -1]);
+        }
+    }
+
     return (
         <VisualizerContainer>
             <ArrayContainer delayTime={delayTime} array={arrayToSort.current} highlightIndices={highlightIndices} swapIndices={swapIndices} sortedIndices={sortedIndices.current} />
             <button type="button" onClick={bubbleSortClickHandler}>Bubble sort</button>
             <button type="button" onClick={selectionSortClickHandler}>Selection sort</button>
+            <button type="button" onClick={insertionSortClickHandler}>Insertion sort</button>
         </VisualizerContainer>
     )
 }
