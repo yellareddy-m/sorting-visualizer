@@ -80,8 +80,8 @@ const Visualizer = (props) => {
     return (
         <VisualizerContainer>
             <ArrayContainer delayTime={delayTime} array={arrayToSort.current} highlightIndices={highlightIndices} swapIndices={swapIndices} sortedIndices={sortedIndices.current} />
-            <button type="button" onClick={bubbleSortClickHandler}>Sort using Bubble sort</button>
-            <button type="button" onClick={selectionSortClickHandler}>Sort using selection sort</button>
+            <button type="button" onClick={bubbleSortClickHandler}>Bubble sort</button>
+            <button type="button" onClick={selectionSortClickHandler}>Selection sort</button>
         </VisualizerContainer>
     )
 }
