@@ -5,7 +5,8 @@ const ArrayContainer = ({
     array,
     highlightIndices,
     swapIndices,
-    sortedIndices }) => {
+    sortedIndices,
+    delayTime }) => {
 
     const source = swapIndices[0];
     const destination = swapIndices[1];
@@ -35,7 +36,7 @@ const ArrayContainer = ({
         <ArrayItems>
             {
                 array.map((ele, i) => (
-                    <ArrayItem key={i} translateX={calculateTransformX(i)} bgColor={getBackgroundColor(i)}>
+                    <ArrayItem key={i} delay={delayTime} translateX={calculateTransformX(i)} bgColor={getBackgroundColor(i)}>
                         {ele}
                     </ArrayItem>)
                 )
