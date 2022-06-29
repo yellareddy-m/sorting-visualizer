@@ -1,19 +1,13 @@
 async function* bubbleSort(array, highlight, swap, markSorted) {
-    let isSorted = false;
-    let counter = 0;
-    while (!isSorted) {
-        isSorted = true;
-        for (let i = 0; i < array.length - 1 - counter; i++) {
-            yield await highlight(i, i + 1)
-            if (array[i] > array[i + 1]) {
-                yield await swap(i, i + 1, array);
-                isSorted = false;
+    for (let i = 0; i < array.length; i++) {
+        for (let j = 0; j < array.length - 1 - i; j++) {
+            yield await highlight(j, j + 1)
+            if (array[j] > array[j + 1]) {
+                yield await swap(j, j + 1, array);
             }
         }
-        markSorted(array.length - 1 - counter);
-        counter++;
+        markSorted(array.length - 1 - i);
     }
-    markSorted(0);
 }
 
 export default bubbleSort;
