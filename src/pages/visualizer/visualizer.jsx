@@ -3,9 +3,12 @@ import { useRef, useState } from 'react';
 import ArrayContainer from '../../components/arrayContainer/array-container';
 import { delay } from '../../helpers';
 import bubbleSort from '../../sortingAlgorithms/bubbleSort';
+import selectionSort from '../../sortingAlgorithms/selectionSort';
 import { VisualizerContainer } from './visualizer.styles';
 
-const defaultSortArray = [8, 5, 2, 9, 6, 3];
+const defaultSortArray = [8, 5, 2, 9, 6, 3, 11, 10];
+
+const delayTime = 800;
 
 const Visualizer = (props) => {
 
@@ -26,13 +29,13 @@ const Visualizer = (props) => {
         // console.log('highlight', i, j);
         clearSwapIndices();
         setHighlightIndices([i, j])
-        await delay(900)
+        await delay(delayTime)
     }
 
     const swap = async (i, j, array) => {
         clearHighlightIndices();
         setSwapIndices([i, j]);
-        await delay(900)
+        await delay(delayTime)
 
         const temp = array[j];
         array[j] = array[i];
@@ -46,7 +49,7 @@ const Visualizer = (props) => {
         sortedIndices.current = [index, ...sortedIndices.current];
     }
 
-    const sortClickHandler = async () => {
+    const bubbleSortClickHandler = async () => {
         const sortFunc = bubbleSort(arrayToSort.current, highlight, swap, markSorted);
         let sortingFinished = false;
         while (!sortingFinished) {
@@ -61,10 +64,24 @@ const Visualizer = (props) => {
         }
     }
 
+    const selectionSortClickHandler = async () => {
+        const sortFunc = selectionSort(arrayToSort.current, highlight, swap, markSorted);
+        let sortingFinished = false;
+        while (!sortingFinished) {
+            let nextValue = await sortFunc.next();
+            sortingFinished = nextValue.done
+        }
+        if (sortingFinished) {
+            setSwapIndices([-1, -1]);
+            setHighlightIndices([-1, -1]);
+        }
+    }
+
     return (
         <VisualizerContainer>
-            <ArrayContainer array={arrayToSort.current} highlightIndices={highlightIndices} swapIndices={swapIndices} sortedIndices={sortedIndices.current} />
-            <button type="button" onClick={sortClickHandler}>Sort !</button>
+            <ArrayContainer delayTime={delayTime} array={arrayToSort.current} highlightIndices={highlightIndices} swapIndices={swapIndices} sortedIndices={sortedIndices.current} />
+            <button type="button" onClick={bubbleSortClickHandler}>Sort using Bubble sort</button>
+            <button type="button" onClick={selectionSortClickHandler}>Sort using selection sort</button>
         </VisualizerContainer>
     )
 }
