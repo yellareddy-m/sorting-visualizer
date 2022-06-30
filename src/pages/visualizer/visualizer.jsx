@@ -1,7 +1,7 @@
 import { useRef, useState } from 'react';
 
 import ArrayContainer from '../../components/arrayContainer/array-container';
-import { delay } from '../../helpers';
+import { delay } from '../../shared/helper';
 import bubbleSort from '../../sortingAlgorithms/bubbleSort';
 import insertionSort from '../../sortingAlgorithms/insertionSort';
 import selectionSort from '../../sortingAlgorithms/selectionSort';
@@ -41,9 +41,6 @@ const Visualizer = (props) => {
         const temp = array[j];
         array[j] = array[i];
         array[i] = temp;
-
-
-        // console.log('swap');
     }
 
     const markSorted = (index) => {
