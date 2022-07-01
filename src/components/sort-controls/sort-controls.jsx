@@ -1,22 +1,25 @@
+import { useContext } from "react";
+import { AppContext } from "../../context/app.context";
 import { AVAILABLE_ALGOS } from "../../shared/constants";
 import DropdownMenu from "../dropdown-menu/dropdown-menu";
-import { SortButton, SortControlsContainer } from "./sort-controls.styles";
+import { Button, SortControlsContainer } from "./sort-controls.styles";
 
-const SortControls = () => {
+const SortControls = ({ sortClickHandler }) => {
 
-    
+    const { sortingInProgress, selectedAlgo } = useContext(AppContext);
 
-    const sortClickHandler = () => {
-        console.log('sort clicked');
+    const generateNewArray = () => {
+        console.log('ddd');
     }
 
     return (
         <SortControlsContainer>
+            <Button disabled={sortingInProgress} onClick={generateNewArray}>Generate new array</Button>
             <DropdownMenu
                 currentAlgo={null}
                 algoList={AVAILABLE_ALGOS}
             />
-            <SortButton onClick={sortClickHandler}>Sort !</SortButton>
+            <Button disabled={sortingInProgress || !selectedAlgo} onClick={sortClickHandler}>Sort !</Button>
         </SortControlsContainer>
     )
 }
