@@ -1,11 +1,13 @@
-import { useRef, useState } from 'react';
+import { useContext, useEffect, useRef, useState } from 'react';
 
 import ArrayContainer from '../../components/arrayContainer/array-container';
+import { AppContext } from '../../context/app.context';
 import { delay } from '../../shared/helper';
 import bubbleSort from '../../sortingAlgorithms/bubbleSort';
 import insertionSort from '../../sortingAlgorithms/insertionSort';
 import selectionSort from '../../sortingAlgorithms/selectionSort';
 import { VisualizerContainer } from './visualizer.styles';
+import SortControls from '../../components/sort-controls/sort-controls';
 
 const defaultSortArray = [8, 5, 2, 9, 6, 3, 11, 10];
 
@@ -13,10 +15,12 @@ const delayTime = 800;
 
 const Visualizer = (props) => {
 
-    const arrayToSort = useRef(defaultSortArray);
+    // const arrayToSort = useRef(defaultSortArray);
+    const [arrayToSort, setArrayToSort] = useState(defaultSortArray)
     const [highlightIndices, setHighlightIndices] = useState([-1, -1]);
     const [swapIndices, setSwapIndices] = useState([-1, -1]);
     const sortedIndices = useRef([]);
+    const { selectedAlgo } = useContext(AppContext);
 
     const clearHighlightIndices = () => {
         setHighlightIndices([-1, -1]);
@@ -27,7 +31,6 @@ const Visualizer = (props) => {
     }
 
     const highlight = async (i, j) => {
-        // console.log('highlight', i, j);
         clearSwapIndices();
         setHighlightIndices([i, j])
         await delay(delayTime)
@@ -36,11 +39,11 @@ const Visualizer = (props) => {
     const swap = async (i, j, array) => {
         clearHighlightIndices();
         setSwapIndices([i, j]);
-        await delay(delayTime)
-
+        await delay(delayTime);
         const temp = array[j];
         array[j] = array[i];
         array[i] = temp;
+        setArrayToSort(array);
     }
 
     const markSorted = (index) => {
@@ -48,7 +51,7 @@ const Visualizer = (props) => {
     }
 
     const bubbleSortClickHandler = async () => {
-        const sortFunc = bubbleSort(arrayToSort.current, highlight, swap, markSorted);
+        const sortFunc = bubbleSort(arrayToSort, highlight, swap, markSorted);
         let sortingFinished = false;
         while (!sortingFinished) {
             let nextValue = null;
@@ -63,7 +66,7 @@ const Visualizer = (props) => {
     }
 
     const selectionSortClickHandler = async () => {
-        const sortFunc = selectionSort(arrayToSort.current, highlight, swap, markSorted);
+        const sortFunc = selectionSort(arrayToSort, highlight, swap, markSorted);
         let sortingFinished = false;
         while (!sortingFinished) {
             let nextValue = await sortFunc.next();
@@ -76,7 +79,7 @@ const Visualizer = (props) => {
     }
 
     const insertionSortClickHandler = async () => {
-        const sortFunc = insertionSort(arrayToSort.current, highlight, swap, markSorted);
+        const sortFunc = insertionSort(arrayToSort, highlight, swap, markSorted);
         let sortingFinished = false;
         while (!sortingFinished) {
             let nextValue = await sortFunc.next();
@@ -88,9 +91,14 @@ const Visualizer = (props) => {
         }
     }
 
+    const sortClickHandler = () => {
+        console.log('started sorting');
+    }
+
     return (
         <VisualizerContainer>
-            <ArrayContainer delayTime={delayTime} array={arrayToSort.current} highlightIndices={highlightIndices} swapIndices={swapIndices} sortedIndices={sortedIndices.current} />
+            <SortControls sortClickHandler={sortClickHandler} />
+            <ArrayContainer delayTime={delayTime} array={arrayToSort} highlightIndices={highlightIndices} swapIndices={swapIndices} sortedIndices={sortedIndices.current}  />
             <button type="button" onClick={bubbleSortClickHandler}>Bubble sort</button>
             <button type="button" onClick={selectionSortClickHandler}>Selection sort</button>
             <button type="button" onClick={insertionSortClickHandler}>Insertion sort</button>
