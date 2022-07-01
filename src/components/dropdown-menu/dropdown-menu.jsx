@@ -1,35 +1,31 @@
-import { useState } from "react";
-import { DropdownItem, DropdownListContainer, DropdownMenuButton, DropdownMenuContainer, DropdownPlaceholder } from "./dropdown-menu.styles";
+import { useContext } from "react";
+import { AppContext } from "../../context/app.context";
+
+import { DropdownCaret, DropdownItem, DropdownListContainer, DropdownMenuButton, DropdownMenuContainer, DropdownPlaceholder } from "./dropdown-menu.styles";
 
 
-const DropdownMenu = ({
-    currentAlgo,
-    algoList
-}) => {
+const DropdownMenu = ({ algoList }) => {
 
-    const [menuOpen, setMenuOpen] = useState(false);
+    const { menuOpen, toggleMenuOpen, selectedAlgo, setSelectedAlgo } = useContext(AppContext);
 
-    const dropdownClickHandler = () => {
-        setMenuOpen(prev => !prev);
-    }
 
     const algoClickHandler = (algo) => {
-        console.log(algo);
-        setMenuOpen(prev => !prev);
+        setSelectedAlgo(algo);
+        toggleMenuOpen();
     }
 
     return (
         <DropdownMenuContainer>
-            <DropdownMenuButton onClick={dropdownClickHandler}>
-                {currentAlgo || <DropdownPlaceholder>Select an algorithm</DropdownPlaceholder>}
-                {menuOpen ? <span className="material-symbols-outlined">
-                    expand_less
-                </span> : <span className="material-symbols-outlined">
-                    expand_more
-                </span>}
+            <DropdownMenuButton onClick={toggleMenuOpen}>
+                {selectedAlgo ? <span>{selectedAlgo}</span> :
+                    <DropdownPlaceholder>Select an algorithm</DropdownPlaceholder>
+                }
+                <DropdownCaret>
+                    {menuOpen ? 'expand_less' : 'expand_more'}
+                </DropdownCaret>
             </DropdownMenuButton>
             {menuOpen ? <DropdownListContainer>
-                {algoList && Object.values(algoList).map(algo => <DropdownItem onClick={algoClickHandler}>
+                {algoList && Object.values(algoList).map(algo => <DropdownItem onClick={() => algoClickHandler(algo)}>
                     {algo}
                 </DropdownItem>)}
             </DropdownListContainer> : null}

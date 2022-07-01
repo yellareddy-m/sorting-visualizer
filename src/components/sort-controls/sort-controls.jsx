@@ -4,6 +4,8 @@ import { SortButton, SortControlsContainer } from "./sort-controls.styles";
 
 const SortControls = () => {
 
+    
+
     const sortClickHandler = () => {
         console.log('sort clicked');
     }

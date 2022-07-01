@@ -19,10 +19,13 @@ export const DropdownMenuButton = styled.div`
     align-items: center;
     justify-content: center;
     margin-right: 20px;
-    .material-symbols-outlined {
-        font-size: 32px;
-        margin-left: 5px;
-    }
+`;
+
+export const DropdownCaret = styled.span`
+    font-size: 32px;
+    margin-left: 5px;
+    font-family: Material Symbols Outlined;
+    line-height: 1;
 `;
 
 export const DropdownListContainer = styled.ul`
