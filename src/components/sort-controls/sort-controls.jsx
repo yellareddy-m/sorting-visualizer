@@ -1,15 +1,16 @@
 import { useContext } from "react";
 import { AppContext } from "../../context/app.context";
 import { AVAILABLE_ALGOS } from "../../shared/constants";
+import { generateRandomArray } from "../../shared/helper";
 import DropdownMenu from "../dropdown-menu/dropdown-menu";
 import { Button, SortControlsContainer } from "./sort-controls.styles";
 
 const SortControls = ({ sortClickHandler }) => {
 
-    const { sortingInProgress, selectedAlgo } = useContext(AppContext);
+    const { sortingInProgress, selectedAlgo, setArrayToSort } = useContext(AppContext);
 
     const generateNewArray = () => {
-        console.log('ddd');
+        setArrayToSort(generateRandomArray())
     }
 
     return (
