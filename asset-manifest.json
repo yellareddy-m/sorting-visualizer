@@ -1,15 +1,16 @@
 {
   "files": {
-    "main.css": "/sorting-visualizer/static/css/main.c136d938.css",
-    "main.js": "/sorting-visualizer/static/js/main.fabb60c0.js",
+    "main.css": "/sorting-visualizer/static/css/main.80281989.css",
+    "main.js": "/sorting-visualizer/static/js/main.a20c34cd.js",
     "static/js/787.f5ecc189.chunk.js": "/sorting-visualizer/static/js/787.f5ecc189.chunk.js",
+    "static/media/github-brands.svg": "/sorting-visualizer/static/media/github-brands.833b63e28cadf07403bc81451d30b858.svg",
     "index.html": "/sorting-visualizer/index.html",
-    "main.c136d938.css.map": "/sorting-visualizer/static/css/main.c136d938.css.map",
-    "main.fabb60c0.js.map": "/sorting-visualizer/static/js/main.fabb60c0.js.map",
+    "main.80281989.css.map": "/sorting-visualizer/static/css/main.80281989.css.map",
+    "main.a20c34cd.js.map": "/sorting-visualizer/static/js/main.a20c34cd.js.map",
     "787.f5ecc189.chunk.js.map": "/sorting-visualizer/static/js/787.f5ecc189.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.c136d938.css",
-    "static/js/main.fabb60c0.js"
+    "static/css/main.80281989.css",
+    "static/js/main.a20c34cd.js"
   ]
 }
