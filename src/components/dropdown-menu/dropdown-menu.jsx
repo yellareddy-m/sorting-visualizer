@@ -17,7 +17,7 @@ const DropdownMenu = ({ algoList }) => {
     return (
         <DropdownMenuContainer>
             <DropdownMenuButton onClick={toggleMenuOpen}>
-                {selectedAlgo ? <span>{selectedAlgo}</span> :
+                {selectedAlgo ? <span>{algoList[selectedAlgo]}</span> :
                     <DropdownPlaceholder>Select an algorithm</DropdownPlaceholder>
                 }
                 <DropdownCaret>
@@ -25,8 +25,8 @@ const DropdownMenu = ({ algoList }) => {
                 </DropdownCaret>
             </DropdownMenuButton>
             {menuOpen ? <DropdownListContainer>
-                {algoList && Object.values(algoList).map(algo => <DropdownItem onClick={() => algoClickHandler(algo)}>
-                    {algo}
+                {algoList && Object.keys(algoList).map(algoKey => <DropdownItem onClick={() => algoClickHandler(algoKey)}>
+                    {algoList[algoKey]}
                 </DropdownItem>)}
             </DropdownListContainer> : null}
         </DropdownMenuContainer>
