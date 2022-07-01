@@ -14,7 +14,8 @@ export const AppContext = createContext({
     ...INITIAL_STATE,
     toggleMenuOpen: () => { },
     setSelectedAlgo: () => { },
-    setSortingInProgress: () => { }
+    setSortingInProgress: () => { },
+    setArrayToSort: () => { }
 });
 
 const appReducer = (state, action) => {
@@ -36,6 +37,11 @@ const appReducer = (state, action) => {
                 ...state,
                 sortingInProgress: payload
             }
+        case APP_ACTION_TYPES.SET_ARRAY_TO_SORT:
+            return {
+                ...state,
+                arrayToSort: payload
+            }
         default:
             return state;
     }
@@ -56,7 +62,10 @@ export const AppProvider = ({ children }) => {
 
     const setSortingInProgress = (value) => {
         dispatch(createAction(APP_ACTION_TYPES.SET_SORTING_IN_PROGRESS, value));
+    }
 
+    const setArrayToSort = (array) => {
+        dispatch(createAction(APP_ACTION_TYPES.SET_ARRAY_TO_SORT, array));
     }
 
     const value = {
@@ -67,6 +76,7 @@ export const AppProvider = ({ children }) => {
         sortingInProgress,
         setSortingInProgress,
         arrayToSort,
+        setArrayToSort
     }
 
     return <AppContext.Provider value={value}>{children}</AppContext.Provider>
