@@ -1,4 +1,5 @@
 import styled, { css, keyframes } from "styled-components";
+import { flexCenterCenter } from "../../App.styles";
 
 
 const swapAnimation = props => keyframes`
@@ -29,10 +30,11 @@ const swapAnimationCSSHelper = props =>
 
 export const ArrayItems = styled.div`
     height: 250px;
-    border: 1px solid #888;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    border: 1px solid #ccc;
+    ${flexCenterCenter};
+    margin-top: 25px;
+    padding: 0 20px;
+    border-radius: 5px;
 `;
 
 export const ArrayItem = styled.div`
@@ -48,5 +50,3 @@ export const ArrayItem = styled.div`
     background-color: ${props => props.bgColor};
     ${(props) => props.translateX && swapAnimationCSSHelper};
 `;
-
-
