@@ -9,17 +9,19 @@ import selectionSort from '../../sortingAlgorithms/selectionSort';
 import { VisualizerContainer } from './visualizer.styles';
 import SortControls from '../../components/sort-controls/sort-controls';
 
-const defaultSortArray = [8, 5, 2, 9, 6, 3, 11, 10];
-
 const delayTime = 800;
 
 const Visualizer = (props) => {
 
-    const [arrayToSort, setArrayToSort] = useState(defaultSortArray)
     const [highlightIndices, setHighlightIndices] = useState([-1, -1]);
     const [swapIndices, setSwapIndices] = useState([-1, -1]);
     const sortedIndices = useRef([]);
-    const { selectedAlgo, setSortingInProgress } = useContext(AppContext);
+    const {
+        selectedAlgo,
+        setSortingInProgress,
+        arrayToSort,
+        setArrayToSort
+    } = useContext(AppContext);
 
     const clearHighlightIndices = () => {
         setHighlightIndices([-1, -1]);
