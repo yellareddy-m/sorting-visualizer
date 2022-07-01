@@ -33,6 +33,8 @@ export const ArrayItems = styled.div`
     display: flex;
     justify-content: center;
     align-items: center;
+    position: relative;
+    top: 50px;
 `;
 
 export const ArrayItem = styled.div`

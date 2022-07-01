@@ -1,15 +1,20 @@
 import { AVAILABLE_ALGOS } from "../../shared/constants";
 import DropdownMenu from "../dropdown-menu/dropdown-menu";
-import { SortControlsContainer } from "./sort-controls.styles";
+import { SortButton, SortControlsContainer } from "./sort-controls.styles";
 
 const SortControls = () => {
-    
+
+    const sortClickHandler = () => {
+        console.log('sort clicked');
+    }
+
     return (
         <SortControlsContainer>
-            {/* <DropdownMenu
-                currentAlgo={AVAILABLE_ALGOS.bubbleSort}
+            <DropdownMenu
+                currentAlgo={null}
                 algoList={AVAILABLE_ALGOS}
-            /> */}
+            />
+            <SortButton onClick={sortClickHandler}>Sort !</SortButton>
         </SortControlsContainer>
     )
 }

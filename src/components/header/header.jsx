@@ -1,21 +1,16 @@
-import { AVAILABLE_ALGOS } from "../../shared/constants";
-import DropdownMenu from "../dropdown-menu/dropdown-menu";
-import { HeaderContainer, HeaderLabel, HeaderLeftSection, SortButton } from "./header.styles";
+import { GithubIcon, HeaderContainer, HeaderLabel, HeaderLeftSection } from "./header.styles";
+
 
 const Header = () => {
-    const sortClickHandler = () => {
-        console.log('sort clicked');
-    }
+
 
     return (
         <HeaderContainer>
             <HeaderLabel>Sorting Visualizer</HeaderLabel>
             <HeaderLeftSection>
-                <DropdownMenu
-                    currentAlgo={null}
-                    algoList={AVAILABLE_ALGOS}
-                />
-                <SortButton onClick={sortClickHandler}>Sort !</SortButton>
+                <a title="Go to github repo" rel="noreferrer" href="https://github.com/yellareddy-m/sorting-visualizer" target="_blank">
+                    <GithubIcon />
+                </a>
             </HeaderLeftSection>
         </HeaderContainer>
     )
