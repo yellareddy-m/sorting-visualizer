@@ -1,4 +1,3 @@
-import './App.css';
 import Header from './components/header/header';
 import Visualizer from './pages/visualizer/visualizer';
 
