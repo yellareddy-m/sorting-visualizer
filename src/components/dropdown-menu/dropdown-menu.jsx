@@ -25,7 +25,7 @@ const DropdownMenu = ({ algoList }) => {
                 </DropdownCaret>
             </DropdownMenuButton>
             {menuOpen ? <DropdownListContainer>
-                {algoList && Object.keys(algoList).map(algoKey => <DropdownItem onClick={() => algoClickHandler(algoKey)}>
+                {algoList && Object.keys(algoList).map(algoKey => <DropdownItem key={algoKey} onClick={() => algoClickHandler(algoKey)}>
                     {algoList[algoKey]}
                 </DropdownItem>)}
             </DropdownListContainer> : null}
