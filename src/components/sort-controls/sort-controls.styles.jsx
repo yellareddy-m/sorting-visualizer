@@ -12,7 +12,6 @@ export const SortControlsContainer = styled.div`
 
 export const disabledButtonStyles = css`
     opacity: 0.8;
-    pointer-events: none;
     cursor: not-allowed;
 `;
 
