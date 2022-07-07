@@ -1,3 +1,4 @@
+import InfoSection from "../info-section/info-section";
 import { ArrayItem, ArrayItems } from "./array-container.styles";
 
 
@@ -6,18 +7,33 @@ const ArrayContainer = ({
     highlightIndices,
     swapIndices,
     sortedIndices,
-    delayTime }) => {
+    delayTime,
+    pivotIndex,
+    moreThanPivotIndices,
+    lessThanPivotIndices }) => {
 
     const source = swapIndices[0];
     const destination = swapIndices[1];
 
     const getBackgroundColor = (index) => {
-        if (highlightIndices.includes(index)) {
-            return 'yellow';
-        }
         if (swapIndices.includes(index)) {
             return 'pink';
         }
+        
+        if (pivotIndex === index) {
+            return 'red';
+        }
+        if (highlightIndices.includes(index)) {
+            return 'yellow';
+        }
+        // if (moreThanPivotIndices.includes(index)) {
+        //     return 'blue';
+        // }
+        // if (lessThanPivotIndices.includes(index)) {
+        //     return 'orange';
+        // }
+        
+        
         if (sortedIndices.includes(index)) {
             return '#03fc62';
         }
