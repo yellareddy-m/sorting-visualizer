@@ -6,16 +6,22 @@ import { delay } from '../../shared/helper';
 import bubbleSort from '../../sortingAlgorithms/bubbleSort';
 import insertionSort from '../../sortingAlgorithms/insertionSort';
 import selectionSort from '../../sortingAlgorithms/selectionSort';
+import quickSort from '../../sortingAlgorithms/quickSort';
 import { VisualizerContainer } from './visualizer.styles';
 import SortControls from '../../components/sort-controls/sort-controls';
+import InfoSection from '../../components/info-section/info-section';
 
-const delayTime = 800;
+const delayTime = 900;
 
 const Visualizer = (props) => {
 
     const [highlightIndices, setHighlightIndices] = useState([-1, -1]);
     const [swapIndices, setSwapIndices] = useState([-1, -1]);
     const sortedIndices = useRef([]);
+    const pivotIndex = useRef(-1);
+    const lessThanPivotIndices = useRef([]);
+    const moreThanPivotIndices = useRef([]);
+
     const {
         selectedAlgo,
         setSortingInProgress,
@@ -51,17 +57,49 @@ const Visualizer = (props) => {
         sortedIndices.current = [index, ...sortedIndices.current];
     }
 
+    const markPivot = (index, clear) => {
+        if (clear) {
+            pivotIndex.current = -1;
+        } else {
+            pivotIndex.current = index;
+        }
+        // await delay(100);
+    }
+
+    const markLessThanPivot = async (index, clear) => {
+        // if (clear) {
+        //     lessThanPivotIndices.current = [];
+        // } else {
+        //     lessThanPivotIndices.current = [...lessThanPivotIndices.current, index];
+        // }
+        // await delay(100);
+    }
+
+    const markMoreThanPivot = async (index, clear) => {
+        // if (clear) {
+        //     moreThanPivotIndices.current = [];
+        // } else {
+        //     moreThanPivotIndices.current = [...moreThanPivotIndices.current, index];
+        // }
+        // await delay(100);
+    }
+
     const getSortFunction = () => {
         return ({
             bubbleSort,
             insertionSort,
-            selectionSort
+            selectionSort,
+            quickSort
         }[selectedAlgo]);
     }
 
     const sortClickHandler = async () => {
-        const sortFunction = getSortFunction()
-        const sortFunctionObj = sortFunction(arrayToSort, highlight, swap, markSorted);
+        sortedIndices.current = [];
+        const sortFunction = getSortFunction();
+        let sortFunctionObj = sortFunction(arrayToSort, highlight, swap, markSorted);
+        if (sortFunction.name === 'quickSort') {
+            sortFunctionObj = sortFunction(arrayToSort, highlight, swap, markSorted, markPivot, markLessThanPivot, markMoreThanPivot);
+        }
         let sortingFinished = false;
         setSortingInProgress(true);
         while (!sortingFinished) {
@@ -71,6 +109,7 @@ const Visualizer = (props) => {
         if (sortingFinished) {
             setSwapIndices([-1, -1]);
             setHighlightIndices([-1, -1]);
+            markPivot(-1);
             setSortingInProgress(false);
         }
     }
@@ -78,7 +117,17 @@ const Visualizer = (props) => {
     return (
         <VisualizerContainer>
             <SortControls sortClickHandler={sortClickHandler} />
-            <ArrayContainer delayTime={delayTime} array={arrayToSort} highlightIndices={highlightIndices} swapIndices={swapIndices} sortedIndices={sortedIndices.current} />
+            <ArrayContainer
+                delayTime={delayTime}
+                array={arrayToSort}
+                highlightIndices={highlightIndices}
+                swapIndices={swapIndices}
+                sortedIndices={sortedIndices.current}
+                pivotIndex={pivotIndex.current}
+                moreThanPivotIndices={moreThanPivotIndices.current}
+                lessThanPivotIndices={lessThanPivotIndices.current}
+            />
+             <InfoSection selectedAlgo={selectedAlgo} />
         </VisualizerContainer>
     )
 }
