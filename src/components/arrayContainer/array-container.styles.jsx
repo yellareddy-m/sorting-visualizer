@@ -25,7 +25,7 @@ const swapAnimation = props => keyframes`
 
 const swapAnimationCSSHelper = props =>
     css`
-    animation: ${swapAnimation(props)} ${props.delay - 100}ms ease-out forwards;
+    animation: ${swapAnimation(props)} ${props.delay}ms ease-out forwards;
 `;
 
 export const ArrayItems = styled.div`
