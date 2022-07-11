@@ -4,10 +4,16 @@ const InfoSection = ({ selectedAlgo }) => {
 
     return (
         <InfoContainer>
-            {selectedAlgo === 'quickSort' && <SingleInfo>
-                <ColorBox bgColor="red" />
-                <span>Pivot</span>
-            </SingleInfo>}
+            {selectedAlgo === 'quickSort' && <>
+                <SingleInfo>
+                    <ColorBox bgColor="red" />
+                    <span>Pivot</span>
+                </SingleInfo>
+                <SingleInfo>
+                    <ColorBox bgColor="blue" />
+                    <span>Less than pivot</span>
+                </SingleInfo>
+            </>}
             {selectedAlgo &&
                 <>
                     <SingleInfo>
