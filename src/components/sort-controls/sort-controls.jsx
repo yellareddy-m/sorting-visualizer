@@ -1,17 +1,13 @@
 import { useContext } from "react";
+
 import { AppContext } from "../../context/app.context";
 import { AVAILABLE_ALGOS } from "../../shared/constants";
-import { generateRandomArray } from "../../shared/helper";
 import DropdownMenu from "../dropdown-menu/dropdown-menu";
 import { Button, SortControlsContainer } from "./sort-controls.styles";
 
-const SortControls = ({ sortClickHandler }) => {
+const SortControls = ({ sortClickHandler, generateNewArray }) => {
 
-    const { sortingInProgress, selectedAlgo, setArrayToSort } = useContext(AppContext);
-
-    const generateNewArray = () => {
-        setArrayToSort(generateRandomArray())
-    }
+    const { sortingInProgress, selectedAlgo } = useContext(AppContext);
 
     return (
         <SortControlsContainer>
