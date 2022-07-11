@@ -2,7 +2,7 @@ import { useContext, useEffect, useRef, useState } from 'react';
 
 import ArrayContainer from '../../components/arrayContainer/array-container';
 import { AppContext } from '../../context/app.context';
-import { delay } from '../../shared/helper';
+import { delay, generateRandomArray } from '../../shared/helper';
 import bubbleSort from '../../sortingAlgorithms/bubbleSort';
 import insertionSort from '../../sortingAlgorithms/insertionSort';
 import selectionSort from '../../sortingAlgorithms/selectionSort';
@@ -66,12 +66,12 @@ const Visualizer = (props) => {
         // await delay(100);
     }
 
-    const markLessThanPivot = async (index, clear) => {
-        // if (clear) {
-        //     lessThanPivotIndices.current = [];
-        // } else {
-        //     lessThanPivotIndices.current = [...lessThanPivotIndices.current, index];
-        // }
+    const markLessThanPivot = (index, clear) => {
+        if (clear) {
+            lessThanPivotIndices.current = [];
+        } else {
+            lessThanPivotIndices.current = [...lessThanPivotIndices.current, index];
+        }
         // await delay(100);
     }
 
@@ -107,16 +107,30 @@ const Visualizer = (props) => {
             sortingFinished = nextValue.done
         }
         if (sortingFinished) {
-            setSwapIndices([-1, -1]);
-            setHighlightIndices([-1, -1]);
-            markPivot(-1);
+            clearColors();
             setSortingInProgress(false);
         }
     }
 
+    const clearColors = () => {
+        setSwapIndices([-1, -1]);
+        setHighlightIndices([-1, -1]);
+        markPivot(-1);
+        lessThanPivotIndices.current = [];
+    }
+
+    const generateNewArray = () => {
+        sortedIndices.current = [];
+        clearColors();
+        setArrayToSort(generateRandomArray());
+    }
+
     return (
         <VisualizerContainer>
-            <SortControls sortClickHandler={sortClickHandler} />
+            <SortControls
+                sortClickHandler={sortClickHandler}
+                generateNewArray={generateNewArray}
+            />
             <ArrayContainer
                 delayTime={delayTime}
                 array={arrayToSort}
@@ -127,7 +141,7 @@ const Visualizer = (props) => {
                 moreThanPivotIndices={moreThanPivotIndices.current}
                 lessThanPivotIndices={lessThanPivotIndices.current}
             />
-             <InfoSection selectedAlgo={selectedAlgo} />
+            <InfoSection selectedAlgo={selectedAlgo} />
         </VisualizerContainer>
     )
 }
