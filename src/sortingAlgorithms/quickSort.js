@@ -15,7 +15,7 @@ async function* quickSort(array, highlight, swap, markSorted, markPivot, markLes
         let swapIdx = start;
         delay(100);
         markPivot(start);
-        // yield await markLessThanPivot(-1, true);
+        yield await markLessThanPivot(-1, true);
         // yield await markMoreThanPivot(-1, true);
         for (let i = start + 1; i <= end; i++) {
             yield await highlight(start, i)
@@ -25,10 +25,11 @@ async function* quickSort(array, highlight, swap, markSorted, markPivot, markLes
                 if (swapIdx !== i) {
                     yield await swap(swapIdx, i, array);
                 }
-                // yield await markLessThanPivot(i);
+                // if (swapIdx !== array.length - 1)
+                yield markLessThanPivot(swapIdx);
             } else {
                 // these are greater than pivot
-                // yield await markMoreThanPivot(i);
+                // yield markMoreThanPivot(i);
             }
         }
         yield await swap(start, swapIdx, array);
