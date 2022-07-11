@@ -1,4 +1,3 @@
-import InfoSection from "../info-section/info-section";
 import { ArrayItem, ArrayItems } from "./array-container.styles";
 
 
@@ -19,24 +18,21 @@ const ArrayContainer = ({
         if (swapIndices.includes(index)) {
             return 'pink';
         }
-        
         if (pivotIndex === index) {
             return 'red';
         }
         if (highlightIndices.includes(index)) {
             return 'yellow';
         }
-        // if (moreThanPivotIndices.includes(index)) {
-        //     return 'blue';
-        // }
-        // if (lessThanPivotIndices.includes(index)) {
-        //     return 'orange';
-        // }
-        
-        
         if (sortedIndices.includes(index)) {
             return '#03fc62';
         }
+        if (lessThanPivotIndices.includes(index)) {
+            return 'blue';
+        }
+        // if (moreThanPivotIndices.includes(index)) {
+        //     return 'orange';
+        // }
         return '';
     }
 
