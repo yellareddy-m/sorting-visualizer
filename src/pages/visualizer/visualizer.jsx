@@ -96,9 +96,11 @@ const Visualizer = (props) => {
     const sortClickHandler = async () => {
         sortedIndices.current = [];
         const sortFunction = getSortFunction();
-        let sortFunctionObj = sortFunction(arrayToSort, highlight, swap, markSorted);
+        let sortFunctionObj = null;
         if (sortFunction.name === 'quickSort') {
             sortFunctionObj = sortFunction(arrayToSort, highlight, swap, markSorted, markPivot, markLessThanPivot, markMoreThanPivot);
+        } else {
+            sortFunctionObj = sortFunction(arrayToSort, highlight, swap, markSorted);
         }
         let sortingFinished = false;
         setSortingInProgress(true);
