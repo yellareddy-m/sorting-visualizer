@@ -97,7 +97,7 @@ const Visualizer = (props) => {
         sortedIndices.current = [];
         const sortFunction = getSortFunction();
         let sortFunctionObj = null;
-        if (sortFunction.name === 'quickSort') {
+        if (selectedAlgo === 'quickSort') {
             sortFunctionObj = sortFunction(arrayToSort, highlight, swap, markSorted, markPivot, markLessThanPivot, markMoreThanPivot);
         } else {
             sortFunctionObj = sortFunction(arrayToSort, highlight, swap, markSorted);
