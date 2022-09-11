@@ -1,9 +1,14 @@
-import styled from "styled-components";
+import styled, { css } from "styled-components";
+
+export const pointerEventsNone = css`
+    pointer-events: none;
+`;
 
 export const DropdownMenuContainer = styled.div`
     width: 250px;
     position: relative;
     margin-right: 25px;
+    ${(props) => props.sortingInProgress && pointerEventsNone}
 `;
 
 export const DropdownPlaceholder = styled.span`

@@ -6,7 +6,7 @@ import { DropdownCaret, DropdownItem, DropdownListContainer, DropdownMenuButton,
 
 const DropdownMenu = ({ algoList }) => {
 
-    const { menuOpen, toggleMenuOpen, selectedAlgo, setSelectedAlgo } = useContext(AppContext);
+    const { menuOpen, toggleMenuOpen, selectedAlgo, setSelectedAlgo, sortingInProgress } = useContext(AppContext);
 
 
     const algoClickHandler = (algo) => {
@@ -15,7 +15,7 @@ const DropdownMenu = ({ algoList }) => {
     }
 
     return (
-        <DropdownMenuContainer>
+        <DropdownMenuContainer sortingInProgress={sortingInProgress}>
             <DropdownMenuButton onClick={toggleMenuOpen}>
                 {selectedAlgo ? <span>{algoList[selectedAlgo]}</span> :
                     <DropdownPlaceholder>Select an algorithm</DropdownPlaceholder>
