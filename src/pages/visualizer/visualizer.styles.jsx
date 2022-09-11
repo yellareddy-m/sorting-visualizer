@@ -8,3 +8,8 @@ export const VisualizerContainer = styled.div`
     flex-direction: column;
     position: relative;
 `;
+
+export const Footer = styled.div`
+    position: fixed;
+    bottom: 20px;
+`;

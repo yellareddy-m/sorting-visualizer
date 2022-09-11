@@ -16,7 +16,7 @@ async function partition(array, start, end, highlight, swap, markSorted, markPiv
     let pivot = array[start];
     // pivot index is start
     let swapIdx = start;
-    delay(100);
+    await delay(100);
     markPivot(start);
     await markLessThanPivot(-1, true);
     // yield await markMoreThanPivot(-1, true);

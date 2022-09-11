@@ -7,7 +7,7 @@ import bubbleSort from '../../sortingAlgorithms/bubbleSort';
 import insertionSort from '../../sortingAlgorithms/insertionSort';
 import selectionSort from '../../sortingAlgorithms/selectionSort';
 import quickSort from '../../sortingAlgorithms/quickSort';
-import { VisualizerContainer } from './visualizer.styles';
+import { Footer, VisualizerContainer } from './visualizer.styles';
 import SortControls from '../../components/sort-controls/sort-controls';
 import InfoSection from '../../components/info-section/info-section';
 
@@ -144,6 +144,7 @@ const Visualizer = (props) => {
                 lessThanPivotIndices={lessThanPivotIndices.current}
             />
             <InfoSection selectedAlgo={selectedAlgo} />
+            <Footer>Made with &#10084; by <a href='https://www.linkedin.com/in/mopuri-yella-reddy-53ab0b9b/' target="_blank">Yella Reddy</a></Footer>
         </VisualizerContainer>
     )
 }
